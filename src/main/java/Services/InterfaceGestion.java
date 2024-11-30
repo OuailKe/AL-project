@@ -1,6 +1,8 @@
 package Services;
 import Enteties.*;
 
+import java.util.ArrayList;
+
 public interface InterfaceGestion {
 
     public Boolean aouterEmployee(Employe e);
@@ -15,6 +17,7 @@ public interface InterfaceGestion {
 
     public Boolean modifierEmployee(Employe employe);
 
+    public ArrayList<Employe> findAllEmployes();
 
 
 }

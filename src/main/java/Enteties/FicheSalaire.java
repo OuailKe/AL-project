@@ -11,11 +11,13 @@ public class FicheSalaire {
 
     private int fId;
     
-    private Employe e;
+    private Employe e;// one-to-many relation
 
     private int nbHeure;
 
     private double tauxHeure;
+
+    private final double taxe = 0.20;
 
     private double salaireBrut;
 

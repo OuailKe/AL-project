@@ -2,6 +2,8 @@ package Services;
 import Databiz.EmployeData;
 import Enteties.*;
 
+import java.util.ArrayList;
+
 public class GestionEmployer implements InterfaceGestion{
 
     @Override
@@ -80,5 +82,10 @@ public class GestionEmployer implements InterfaceGestion{
         }
 
         return result;
+    }
+
+    @Override
+    public ArrayList<Employe> findAllEmployes() {
+        return EmployeData.listEmployee;
     }
 }
