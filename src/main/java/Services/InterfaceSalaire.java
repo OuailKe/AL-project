@@ -5,7 +5,7 @@ import Enteties.FicheSalaire;
 
 public interface InterfaceSalaire {
 
-    public double calculerSalair(FicheSalaire ficheS);
+    public boolean calculerSalair(FicheSalaire ficheS);
 
     public boolean ajouterFicheSalaire(FicheSalaire ficheS);
 

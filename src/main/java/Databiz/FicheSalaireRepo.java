@@ -10,13 +10,14 @@ public class FicheSalaireRepo implements FicheSalaireRepoInterface {
 
     @Override
     public boolean addFicheSalaire(FicheSalaire ficheSalaire) {
-        String query = "INSERT INTO FicheSalaire (nbHeure, tauxHeure, salaireBrut, salireNet) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO FicheSalaire (nbHeure, tauxHeure, salaireBrut, salireNet,employeId) VALUES (?,?, ?, ?, ?)";
         try (Connection conn = DataBaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, ficheSalaire.getNbHeure());
             stmt.setDouble(2, ficheSalaire.getTauxHeure());
             stmt.setDouble(3, ficheSalaire.getSalaireBrut());
             stmt.setDouble(4, ficheSalaire.getSalireNet());
+            stmt.setInt(5, ficheSalaire.getE().getId());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {

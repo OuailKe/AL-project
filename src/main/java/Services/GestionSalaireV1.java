@@ -10,19 +10,26 @@ public class GestionSalaireV1 implements InterfaceSalaire {
 
     FicheSalaireRepoInterface repo = new FicheSalaireRepo();
     @Override
-    public double calculerSalair(FicheSalaire ficheS) {
+    public boolean calculerSalair(FicheSalaire ficheS) {
 
-        double salBrut = ficheS.getNbHeure() * ficheS.getNbHeure();
-        ficheS.setSalaireBrut(salBrut);
+        try {
+            double salBrut = ficheS.getNbHeure() * ficheS.getNbHeure();
+            ficheS.setSalaireBrut(salBrut);
 
-        double salNet = salBrut * ficheS.getTaxe();
-        ficheS.setSalireNet(salNet);
+            double salNet = salBrut - (salBrut * ficheS.getTaxe());
+            ficheS.setSalireNet(salNet);
 
-        return salNet;
+            return true;
+        }catch (Exception ex){
+            ex.getMessage();
+            return false;
+        }
+
     }
 
     @Override
     public boolean ajouterFicheSalaire(FicheSalaire ficheS) {
+        calculerSalair(ficheS);
         try {
             return repo.addFicheSalaire(ficheS);
         } catch (Exception ex) {

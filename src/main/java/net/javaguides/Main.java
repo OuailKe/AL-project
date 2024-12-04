@@ -1,6 +1,7 @@
 package net.javaguides;
 
 import EmployeIHM.IHMEmploye;
+import EmployeIHM.IHMEmployeV2;
 import Enteties.Employe;
 import Databiz.EmployeData;
 import Services.*;
@@ -25,47 +26,45 @@ public class Main {
 //            }
 //
 //        static InterfaceGestion gestion = new GestionEmployeV1();
-        Scanner scanner = new Scanner(System.in);
-        int choice;
 
-        do {
-            System.out.println("Menu:");
-            System.out.println("1. Saisir Employe");
-            System.out.println("2. Afficher Employe");
-            System.out.println("3. Quitter");
-            System.out.print("Entrez votre choix: ");
-            choice = scanner.nextInt();
+        ////////////////////////////////////////////////////////////////////////////////////////
+//        Scanner scanner = new Scanner(System.in);
+//        int choice;
+//
+//        do {
+//            System.out.println("Menu:");
+//            System.out.println("1. Saisir Employe");
+//            System.out.println("2. Afficher Employe");
+//            System.out.println("3. Quitter");
+//            System.out.print("Entrez votre choix: ");
+//            choice = scanner.nextInt();
+//
+//            switch (choice) {
+//                case 1:
+//                    IHMEmploye.sasirEmploye();
+//                    break;
+//                case 2:
+//                    System.out.print("Entrez le nom de l'employe: ");
+//                    String nom = scanner.next();
+//                    IHMEmploye.afficherEmploye(nom);
+//                    break;
+//                case 3:
+//                    System.out.println("Au revoir!");
+//                    break;
+//                default:
+//                    System.out.println("Choix invalide, veuillez réessayer.");
+//            }
+//        } while (choice != 3);
+//
+//        scanner.close();
 
-            switch (choice) {
-                case 1:
-                    IHMEmploye.sasirEmploye();
-                    break;
-                case 2:
-                    System.out.print("Entrez le nom de l'employe: ");
-                    String nom = scanner.next();
-                    IHMEmploye.afficherEmploye(nom);
-                    break;
-                case 3:
-                    System.out.println("Au revoir!");
-                    break;
-                default:
-                    System.out.println("Choix invalide, veuillez réessayer.");
-            }
-        } while (choice != 3);
+//////////////////////////////////////////////////////////////////
 
-        scanner.close();
-
-
-
-
-
-
-
-
+        new IHMEmployeV2().setVisible(true);
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

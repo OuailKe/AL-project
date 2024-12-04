@@ -15,6 +15,7 @@ public class IHMSalaire {
 
     public static void saisirFicheSalaire(){
         FicheSalaire f = new FicheSalaire();
+
         System.out.println("Saisir le nombre h'heures :");
         f.setNbHeure(scan.nextInt());
 
