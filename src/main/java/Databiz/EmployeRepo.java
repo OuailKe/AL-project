@@ -26,11 +26,19 @@ public class EmployeRepo implements EmployeRepoInterface {
 
     @Override
     public boolean deleteEmploye(int id) {
-        String query = "DELETE FROM Employe WHERE Id = ?";
-        try (Connection conn = DataBaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+        String deleteFicheSalaireQuery = "DELETE FROM FicheSalaire WHERE employeId = ?";
+        String deleteEmployeQuery = "DELETE FROM Employe WHERE Id = ?";
+        try (Connection conn = DataBaseConnection.getConnection()) {
+            // Delete associated FicheSalaire records
+            try (PreparedStatement stmt = conn.prepareStatement(deleteFicheSalaireQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+            // Delete the Employe record
+            try (PreparedStatement stmt = conn.prepareStatement(deleteEmployeQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -74,7 +74,7 @@ public class IHMEmployeV2 extends JFrame {
 
         employeInitPanel.add(ajouterEmp);
        // employeInitPanel.add(modifierEmp);
-        employeInitPanel.add(supprimerEmp);
+       // employeInitPanel.add(supprimerEmp);
         employeInitPanel.add(afficherEmp);
 
         add(employePanel, "Ajouter Employe Panel");
@@ -146,7 +146,7 @@ public class IHMEmployeV2 extends JFrame {
         // Add buttons to salaireInitPanel
         ajouterSalaire = new JButton("Ajouter Salaire");
        // modifierSalaire = new JButton("Modifier Salaire");
-        supprimerSalaire = new JButton("Supprimer Salaire");
+       // supprimerSalaire = new JButton("Supprimer Salaire");
         afficherSalaire = new JButton("Lister Salaire");
 
         ajouterSalaire.addActionListener(e -> cl.show(getContentPane(), "Ajouter Salaire Panel"));
@@ -154,7 +154,7 @@ public class IHMEmployeV2 extends JFrame {
 
         salaireInitPanel.add(ajouterSalaire);
         //salaireInitPanel.add(modifierSalaire);
-        salaireInitPanel.add(supprimerSalaire);
+        // salaireInitPanel.add(supprimerSalaire);
         salaireInitPanel.add(afficherSalaire);
 
         GridBagConstraints gbcSalaire = new GridBagConstraints();
@@ -411,6 +411,94 @@ public class IHMEmployeV2 extends JFrame {
         salaireInitPanel.add(modifyFicheButton);
         modifyFicheButton.addActionListener(e -> cl.show(getContentPane(), "Modify FicheSalaire Panel"));
 
+
+        // for deleting
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Create a new panel for deleting an employee
+        JPanel deleteEmployePanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbcDelete = new GridBagConstraints();
+        gbcDelete.insets = new Insets(5, 5, 5, 5);
+        gbcDelete.fill = GridBagConstraints.HORIZONTAL;
+
+// Add components to the deleteEmployePanel
+        gbcDelete.gridx = 0;
+        gbcDelete.gridy = 0;
+        deleteEmployePanel.add(new JLabel("Enter Employee ID:"), gbcDelete);
+        gbcDelete.gridx = 1;
+        JTextField idFieldDelete = new JTextField(15);
+        deleteEmployePanel.add(idFieldDelete, gbcDelete);
+
+        gbcDelete.gridx = 0;
+        gbcDelete.gridy = 1;
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.setBackground(Color.RED);
+        deleteButton.setForeground(Color.WHITE);
+        deleteEmployePanel.add(deleteButton, gbcDelete);
+
+// Add the deleteEmployePanel to the card layout
+        add(deleteEmployePanel, "Delete Employe Panel");
+
+// Action listener for the delete button
+        deleteButton.addActionListener(e -> {
+            int id = Integer.parseInt(idFieldDelete.getText());
+            if (gestion.supprimerEmployee(gestion.chercherEmployee(id))) {
+                JOptionPane.showMessageDialog(null, "Employee deleted successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to delete employee!");
+            }
+        });
+
+// Add a button to navigate to the deleteEmployePanel
+        JButton deleteEmpButton = new JButton("Delete Employe");
+        deleteEmpButton.setBackground(Color.RED);
+        deleteEmpButton.setForeground(Color.WHITE);
+        employeInitPanel.add(deleteEmpButton);
+        deleteEmpButton.addActionListener(e -> cl.show(getContentPane(), "Delete Employe Panel"));
+        // dellete the ficheSalaire
+        // Create a new panel for deleting a FicheSalaire
+        JPanel deleteFicheSalairePanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbcDeleteFiche = new GridBagConstraints();
+        gbcDeleteFiche.insets = new Insets(5, 5, 5, 5);
+        gbcDeleteFiche.fill = GridBagConstraints.HORIZONTAL;
+
+// Add components to the deleteFicheSalairePanel
+        gbcDeleteFiche.gridx = 0;
+        gbcDeleteFiche.gridy = 0;
+        deleteFicheSalairePanel.add(new JLabel("Enter FicheSalaire ID:"), gbcDeleteFiche);
+        gbcDeleteFiche.gridx = 1;
+        JTextField idFieldDeleteFiche = new JTextField(15);
+        deleteFicheSalairePanel.add(idFieldDeleteFiche, gbcDeleteFiche);
+
+        gbcDeleteFiche.gridx = 0;
+        gbcDeleteFiche.gridy = 1;
+        JButton deleteButtonFiche = new JButton("Delete");
+        deleteButtonFiche.setBackground(Color.RED);
+        deleteButtonFiche.setForeground(Color.WHITE);
+        deleteFicheSalairePanel.add(deleteButtonFiche, gbcDeleteFiche);
+
+// Add the deleteFicheSalairePanel to the card layout
+        add(deleteFicheSalairePanel, "Delete FicheSalaire Panel");
+
+// Action listener for the delete button
+        deleteButtonFiche.addActionListener(e -> {
+            int id = Integer.parseInt(idFieldDeleteFiche.getText());
+            FicheSalaire ficheSalaire = gestionSalaire.chercherFicheSalaire(id);
+            if (ficheSalaire != null) {
+                gestionSalaire.supprimerFicheSalaire(ficheSalaire);
+                JOptionPane.showMessageDialog(null, "FicheSalaire deleted successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "FicheSalaire not found!");
+            }
+        });
+
+// Add a button to navigate to the deleteFicheSalairePanel
+        JButton deleteFicheButton = new JButton("Delete FicheSalaire");
+        deleteFicheButton.setBackground(Color.RED);
+        deleteFicheButton.setForeground(Color.WHITE);
+        salaireInitPanel.add(deleteFicheButton);
+        deleteFicheButton.addActionListener(e -> cl.show(getContentPane(), "Delete FicheSalaire Panel"));
+
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Back button for employePanel
@@ -462,6 +550,22 @@ public class IHMEmployeV2 extends JFrame {
         gbc.gridy = 7;
         modifyFicheSalairePanel.add(backButtonToSalaire2, gbc);
 
+        // Back button from delete panel
+        JButton backButtonToEmploye3 = new JButton("Back");
+        backButtonEmploye.setBackground(Color.RED);
+        backButtonEmploye.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        deleteEmployePanel.add(backButtonToEmploye3, gbc);
+
+        // Back button from ficheSalaire delete panel
+        JButton backButtonToSalaire3 = new JButton("Back");
+        backButtonEmploye.setBackground(Color.RED);
+        backButtonEmploye.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        deleteFicheSalairePanel.add(backButtonToSalaire3, gbc);
+
 
 // Action listeners for back buttons
         backButtonEmploye.addActionListener(e -> cl.show(getContentPane(), "Main Menu"));
@@ -470,6 +574,8 @@ public class IHMEmployeV2 extends JFrame {
         backButtonToSalaire.addActionListener(e -> cl.show(getContentPane(), "Salaire Panel"));
         backButtonToEmploye2.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
         backButtonToSalaire2.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
+        backButtonToEmploye3.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
+        backButtonToSalaire3.addActionListener(e -> cl.show(getContentPane(), "Salaire Panel"));
 
 
 
