@@ -2,9 +2,11 @@ package Services;
 
 import Databiz.FicheSalaireRepo;
 import Databiz.FicheSalaireRepoInterface;
+import Enteties.Employe;
 import Enteties.FicheSalaire;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestionSalaireV1 implements InterfaceSalaire {
 
@@ -65,5 +67,20 @@ public class GestionSalaireV1 implements InterfaceSalaire {
             ex.getMessage();
             return null;
         }
+    }
+
+    @Override
+    public List<FicheSalaire> findAllFicheSalaires() {
+
+            List<FicheSalaire> ficheSalaires = repo.findAllFicheSalaires();
+            for (FicheSalaire f : ficheSalaires) {
+                System.out.println("ID: " + f.getFId());
+                System.out.println("Nombre d'heures: " + f.getNbHeure());
+                System.out.println("Taux d'heures: " + f.getTauxHeure());
+                System.out.println("Salaire brut: " + f.getSalaireBrut());
+                System.out.println("Salaire net: " + f.getSalireNet());
+                System.out.println("-------------------------");
+            }
+        return ficheSalaires;
     }
 }

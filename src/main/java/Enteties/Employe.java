@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 //@RequiredArgsConstructor
 public class Employe {
     public int Id;

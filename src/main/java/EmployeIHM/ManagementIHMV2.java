@@ -1,3 +1,4 @@
+
 package EmployeIHM;
 
 import Enteties.Employe;
@@ -8,13 +9,14 @@ import Services.InterfaceGestion;
 import Services.InterfaceSalaire;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+        import java.awt.*;
 
-public class IHMEmployeV2 extends JFrame {
+public class ManagementIHMV2 extends JFrame implements ManagementInterface {
 
-    private JTextField idField, nomField, prenomField, adresseField, numTelField;
+    private JTextField idField, nomField, prenomField, adresseField, numTelField ;
+    private JTextField idFieldModify, nomFieldModify, prenomFieldModify, adresseFieldModify, numTelFieldModify;
+    private JTextField idFieldModifyFiche, nbHeureFieldModify, tauxHeureFieldModify, salaireBrutFieldModify, salaireNetFieldModify;
+    private JTextField nbhHeure, tauxHeure, idEmploye, salaireBrutField, salaireNetField;
     private JButton submitButton, displayButton,submitButtonSalaire, displayButtonSalaire;
     private JButton gestionEmployeButton, gestionSalaireButton;
     private JButton ajouterEmp, modifierEmp, supprimerEmp, chercherEmp, afficherEmp;
@@ -23,7 +25,7 @@ public class IHMEmployeV2 extends JFrame {
     private JTextArea displayArea;
     private InterfaceGestion gestion = new GestionEmployeV1();
     private InterfaceSalaire gestionSalaire = new GestionSalaireV1();
-    public IHMEmployeV2() {
+    public ManagementIHMV2() {
         setTitle("Employee Management");
         setSize(500, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,19 +70,19 @@ public class IHMEmployeV2 extends JFrame {
         ///////////////////////////////////////////////////////////////////////////////
         // Add buttons to employeInitPanel
         ajouterEmp = new JButton("Ajouter Employe");
-       modifierEmp = new JButton("Modifier Employe");
+        modifierEmp = new JButton("Modifier Employe");
         supprimerEmp = new JButton("Supprimer Employe");
         afficherEmp = new JButton("Lister Employe");
 
         employeInitPanel.add(ajouterEmp);
-       // employeInitPanel.add(modifierEmp);
-       // employeInitPanel.add(supprimerEmp);
+        // employeInitPanel.add(modifierEmp);
+        employeInitPanel.add(supprimerEmp);
         employeInitPanel.add(afficherEmp);
 
         add(employePanel, "Ajouter Employe Panel");
         ajouterEmp.addActionListener(e -> cl.show(getContentPane(), "Ajouter Employe Panel"));
 
-                        ///////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -145,8 +147,8 @@ public class IHMEmployeV2 extends JFrame {
 
         // Add buttons to salaireInitPanel
         ajouterSalaire = new JButton("Ajouter Salaire");
-       // modifierSalaire = new JButton("Modifier Salaire");
-       // supprimerSalaire = new JButton("Supprimer Salaire");
+        // modifierSalaire = new JButton("Modifier Salaire");
+        supprimerSalaire = new JButton("Supprimer Salaire");
         afficherSalaire = new JButton("Lister Salaire");
 
         ajouterSalaire.addActionListener(e -> cl.show(getContentPane(), "Ajouter Salaire Panel"));
@@ -154,7 +156,7 @@ public class IHMEmployeV2 extends JFrame {
 
         salaireInitPanel.add(ajouterSalaire);
         //salaireInitPanel.add(modifierSalaire);
-        // salaireInitPanel.add(supprimerSalaire);
+        salaireInitPanel.add(supprimerSalaire);
         salaireInitPanel.add(afficherSalaire);
 
         GridBagConstraints gbcSalaire = new GridBagConstraints();
@@ -172,21 +174,21 @@ public class IHMEmployeV2 extends JFrame {
         gbcSalaire.gridy = 1;
         salairePanel.add(new JLabel("Nombre d'heure:"), gbcSalaire);
         gbcSalaire.gridx = 1;
-        JTextField nbhHeure = new JTextField(15);
+        nbhHeure = new JTextField(15);
         salairePanel.add(nbhHeure, gbcSalaire);
 
         gbcSalaire.gridx = 0;
         gbcSalaire.gridy = 2;
         salairePanel.add(new JLabel("Taux d'heure:"), gbcSalaire);
         gbcSalaire.gridx = 1;
-        JTextField tauxHeure = new JTextField(15);
+        tauxHeure = new JTextField(15);
         salairePanel.add(tauxHeure, gbcSalaire);
 
         gbcSalaire.gridx = 0;
         gbcSalaire.gridy = 3;
         salairePanel.add(new JLabel("Id de l'employe:"), gbcSalaire);
         gbcSalaire.gridx = 1;
-        JTextField idEmploye = new JTextField(15);
+        idEmploye = new JTextField(15);
         salairePanel.add(idEmploye, gbcSalaire);
 
 //        gbcSalaire.gridx = 0;
@@ -232,35 +234,35 @@ public class IHMEmployeV2 extends JFrame {
         gbcModify.gridy = 0;
         modifyEmployePanel.add(new JLabel("Enter Employee ID:"), gbcModify);
         gbcModify.gridx = 1;
-        JTextField idFieldModify = new JTextField(15);
+        idFieldModify = new JTextField(15);
         modifyEmployePanel.add(idFieldModify, gbcModify);
 
         gbcModify.gridx = 0;
         gbcModify.gridy = 1;
         modifyEmployePanel.add(new JLabel("Nom:"), gbcModify);
         gbcModify.gridx = 1;
-        JTextField nomFieldModify = new JTextField(15);
+        nomFieldModify = new JTextField(15);
         modifyEmployePanel.add(nomFieldModify, gbcModify);
 
         gbcModify.gridx = 0;
         gbcModify.gridy = 2;
         modifyEmployePanel.add(new JLabel("Prenom:"), gbcModify);
         gbcModify.gridx = 1;
-        JTextField prenomFieldModify = new JTextField(15);
+        prenomFieldModify = new JTextField(15);
         modifyEmployePanel.add(prenomFieldModify, gbcModify);
 
         gbcModify.gridx = 0;
         gbcModify.gridy = 3;
         modifyEmployePanel.add(new JLabel("Adresse:"), gbcModify);
         gbcModify.gridx = 1;
-        JTextField adresseFieldModify = new JTextField(15);
+        adresseFieldModify = new JTextField(15);
         modifyEmployePanel.add(adresseFieldModify, gbcModify);
 
         gbcModify.gridx = 0;
         gbcModify.gridy = 4;
         modifyEmployePanel.add(new JLabel("Num Tel:"), gbcModify);
         gbcModify.gridx = 1;
-        JTextField numTelFieldModify = new JTextField(15);
+        numTelFieldModify = new JTextField(15);
         modifyEmployePanel.add(numTelFieldModify, gbcModify);
 
         gbcModify.gridx = 0;
@@ -317,7 +319,7 @@ public class IHMEmployeV2 extends JFrame {
 
 
         // modify ficheSalaire
-      // Create a new panel for modifying a FicheSalaire
+        // Create a new panel for modifying a FicheSalaire
         JPanel modifyFicheSalairePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbcModifyFiche = new GridBagConstraints();
         gbcModifyFiche.insets = new Insets(5, 5, 5, 5);
@@ -328,35 +330,35 @@ public class IHMEmployeV2 extends JFrame {
         gbcModifyFiche.gridy = 0;
         modifyFicheSalairePanel.add(new JLabel("Enter FicheSalaire ID:"), gbcModifyFiche);
         gbcModifyFiche.gridx = 1;
-        JTextField idFieldModifyFiche = new JTextField(15);
+        idFieldModifyFiche = new JTextField(15);
         modifyFicheSalairePanel.add(idFieldModifyFiche, gbcModifyFiche);
 
         gbcModifyFiche.gridx = 0;
         gbcModifyFiche.gridy = 1;
         modifyFicheSalairePanel.add(new JLabel("Nombre d'heure:"), gbcModifyFiche);
         gbcModifyFiche.gridx = 1;
-        JTextField nbHeureFieldModify = new JTextField(15);
+        nbHeureFieldModify = new JTextField(15);
         modifyFicheSalairePanel.add(nbHeureFieldModify, gbcModifyFiche);
 
         gbcModifyFiche.gridx = 0;
         gbcModifyFiche.gridy = 2;
         modifyFicheSalairePanel.add(new JLabel("Taux d'heure:"), gbcModifyFiche);
         gbcModifyFiche.gridx = 1;
-        JTextField tauxHeureFieldModify = new JTextField(15);
+        tauxHeureFieldModify = new JTextField(15);
         modifyFicheSalairePanel.add(tauxHeureFieldModify, gbcModifyFiche);
 
         gbcModifyFiche.gridx = 0;
         gbcModifyFiche.gridy = 3;
         modifyFicheSalairePanel.add(new JLabel("Salaire Brut:"), gbcModifyFiche);
         gbcModifyFiche.gridx = 1;
-        JTextField salaireBrutFieldModify = new JTextField(15);
+        salaireBrutFieldModify = new JTextField(15);
         modifyFicheSalairePanel.add(salaireBrutFieldModify, gbcModifyFiche);
 
         gbcModifyFiche.gridx = 0;
         gbcModifyFiche.gridy = 4;
         modifyFicheSalairePanel.add(new JLabel("Salaire Net:"), gbcModifyFiche);
         gbcModifyFiche.gridx = 1;
-        JTextField salaireNetFieldModify = new JTextField(15);
+        salaireNetFieldModify = new JTextField(15);
         modifyFicheSalairePanel.add(salaireNetFieldModify, gbcModifyFiche);
 
         gbcModifyFiche.gridx = 0;
@@ -411,94 +413,6 @@ public class IHMEmployeV2 extends JFrame {
         salaireInitPanel.add(modifyFicheButton);
         modifyFicheButton.addActionListener(e -> cl.show(getContentPane(), "Modify FicheSalaire Panel"));
 
-
-        // for deleting
-// ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // Create a new panel for deleting an employee
-        JPanel deleteEmployePanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbcDelete = new GridBagConstraints();
-        gbcDelete.insets = new Insets(5, 5, 5, 5);
-        gbcDelete.fill = GridBagConstraints.HORIZONTAL;
-
-// Add components to the deleteEmployePanel
-        gbcDelete.gridx = 0;
-        gbcDelete.gridy = 0;
-        deleteEmployePanel.add(new JLabel("Enter Employee ID:"), gbcDelete);
-        gbcDelete.gridx = 1;
-        JTextField idFieldDelete = new JTextField(15);
-        deleteEmployePanel.add(idFieldDelete, gbcDelete);
-
-        gbcDelete.gridx = 0;
-        gbcDelete.gridy = 1;
-        JButton deleteButton = new JButton("Delete");
-        deleteButton.setBackground(Color.RED);
-        deleteButton.setForeground(Color.WHITE);
-        deleteEmployePanel.add(deleteButton, gbcDelete);
-
-// Add the deleteEmployePanel to the card layout
-        add(deleteEmployePanel, "Delete Employe Panel");
-
-// Action listener for the delete button
-        deleteButton.addActionListener(e -> {
-            int id = Integer.parseInt(idFieldDelete.getText());
-            if (gestion.supprimerEmployee(gestion.chercherEmployee(id))) {
-                JOptionPane.showMessageDialog(null, "Employee deleted successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to delete employee!");
-            }
-        });
-
-// Add a button to navigate to the deleteEmployePanel
-        JButton deleteEmpButton = new JButton("Delete Employe");
-        deleteEmpButton.setBackground(Color.RED);
-        deleteEmpButton.setForeground(Color.WHITE);
-        employeInitPanel.add(deleteEmpButton);
-        deleteEmpButton.addActionListener(e -> cl.show(getContentPane(), "Delete Employe Panel"));
-        // dellete the ficheSalaire
-        // Create a new panel for deleting a FicheSalaire
-        JPanel deleteFicheSalairePanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbcDeleteFiche = new GridBagConstraints();
-        gbcDeleteFiche.insets = new Insets(5, 5, 5, 5);
-        gbcDeleteFiche.fill = GridBagConstraints.HORIZONTAL;
-
-// Add components to the deleteFicheSalairePanel
-        gbcDeleteFiche.gridx = 0;
-        gbcDeleteFiche.gridy = 0;
-        deleteFicheSalairePanel.add(new JLabel("Enter FicheSalaire ID:"), gbcDeleteFiche);
-        gbcDeleteFiche.gridx = 1;
-        JTextField idFieldDeleteFiche = new JTextField(15);
-        deleteFicheSalairePanel.add(idFieldDeleteFiche, gbcDeleteFiche);
-
-        gbcDeleteFiche.gridx = 0;
-        gbcDeleteFiche.gridy = 1;
-        JButton deleteButtonFiche = new JButton("Delete");
-        deleteButtonFiche.setBackground(Color.RED);
-        deleteButtonFiche.setForeground(Color.WHITE);
-        deleteFicheSalairePanel.add(deleteButtonFiche, gbcDeleteFiche);
-
-// Add the deleteFicheSalairePanel to the card layout
-        add(deleteFicheSalairePanel, "Delete FicheSalaire Panel");
-
-// Action listener for the delete button
-        deleteButtonFiche.addActionListener(e -> {
-            int id = Integer.parseInt(idFieldDeleteFiche.getText());
-            FicheSalaire ficheSalaire = gestionSalaire.chercherFicheSalaire(id);
-            if (ficheSalaire != null) {
-                gestionSalaire.supprimerFicheSalaire(ficheSalaire);
-                JOptionPane.showMessageDialog(null, "FicheSalaire deleted successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "FicheSalaire not found!");
-            }
-        });
-
-// Add a button to navigate to the deleteFicheSalairePanel
-        JButton deleteFicheButton = new JButton("Delete FicheSalaire");
-        deleteFicheButton.setBackground(Color.RED);
-        deleteFicheButton.setForeground(Color.WHITE);
-        salaireInitPanel.add(deleteFicheButton);
-        deleteFicheButton.addActionListener(e -> cl.show(getContentPane(), "Delete FicheSalaire Panel"));
-
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Back button for employePanel
@@ -550,22 +464,6 @@ public class IHMEmployeV2 extends JFrame {
         gbc.gridy = 7;
         modifyFicheSalairePanel.add(backButtonToSalaire2, gbc);
 
-        // Back button from delete panel
-        JButton backButtonToEmploye3 = new JButton("Back");
-        backButtonEmploye.setBackground(Color.RED);
-        backButtonEmploye.setForeground(Color.WHITE);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        deleteEmployePanel.add(backButtonToEmploye3, gbc);
-
-        // Back button from ficheSalaire delete panel
-        JButton backButtonToSalaire3 = new JButton("Back");
-        backButtonEmploye.setBackground(Color.RED);
-        backButtonEmploye.setForeground(Color.WHITE);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        deleteFicheSalairePanel.add(backButtonToSalaire3, gbc);
-
 
 // Action listeners for back buttons
         backButtonEmploye.addActionListener(e -> cl.show(getContentPane(), "Main Menu"));
@@ -574,8 +472,6 @@ public class IHMEmployeV2 extends JFrame {
         backButtonToSalaire.addActionListener(e -> cl.show(getContentPane(), "Salaire Panel"));
         backButtonToEmploye2.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
         backButtonToSalaire2.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
-        backButtonToEmploye3.addActionListener(e -> cl.show(getContentPane(), "Employe Panel"));
-        backButtonToSalaire3.addActionListener(e -> cl.show(getContentPane(), "Salaire Panel"));
 
 
 
@@ -616,7 +512,7 @@ public class IHMEmployeV2 extends JFrame {
 
         displayButton.addActionListener(e -> {
             String nom = nomField.getText();
-            Employe employe = IHMEmploye.gestion.chercherEmployee(nom);
+            Employe employe = gestion.chercherEmployee(nom);
             if (employe != null) {
                 displayArea.setText("Nom: " + employe.getNom() + "\n" +
                         "Prenom: " + employe.getPrenom() + "\n" +
@@ -627,7 +523,161 @@ public class IHMEmployeV2 extends JFrame {
             }
         });
 
-        
+
     }
 
+    @Override
+    public void addEmploye() {
+        Employe employe = new Employe(
+                Integer.parseInt(idField.getText()),
+                nomField.getText(),
+                prenomField.getText(),
+                adresseField.getText(),
+                numTelField.getText()
+        );
+        gestion.aouterEmployee(employe);
+        JOptionPane.showMessageDialog(null, "Employee added successfully!");
+    }
+
+    @Override
+    public void deleteEmploye() {
+        String name = JOptionPane.showInputDialog("Enter the employee name:");
+        Employe e = gestion.chercherEmployee(name);
+        if (e != null) {
+            gestion.supprimerEmployee(e);
+            JOptionPane.showMessageDialog(null, "Employee deleted successfully.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Employee not found.");
+        }
+    }
+
+    @Override
+    public void findEmploye(String nom) {
+        Employe e = gestion.chercherEmployee(nom);
+        if (e != null) {
+            displayArea.setText("Nom: " + e.getNom() + "\n" +
+                    "Prenom: " + e.getPrenom() + "\n" +
+                    "Adresse: " + e.getAdresse() + "\n" +
+                    "Num Tel: " + e.getNumTel());
+        } else {
+            displayArea.setText("Employee not found!");
+        }
+    }
+
+    @Override
+    public void findAllEmployes() {
+        StringBuilder sb = new StringBuilder();
+        for (Employe e : gestion.findAllEmployes()) {
+            sb.append("Id: ").append(e.getId()).append("\n")
+                    .append("Nom: ").append(e.getNom()).append("\n")
+                    .append("Prenom: ").append(e.getPrenom()).append("\n")
+                    .append("Adresse: ").append(e.getAdresse()).append("\n")
+                    .append("Num Tel: ").append(e.getNumTel()).append("\n")
+                    .append("-------------------------\n");
+        }
+        displayArea.setText(sb.toString());
+    }
+
+    @Override
+    public void updateEmploye() {
+        try {
+            if (idField.getText().isEmpty() || nomField.getText().isEmpty() || prenomField.getText().isEmpty() || adresseField.getText().isEmpty() || numTelField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields must be filled out!");
+                return;
+            }
+            Employe e = new Employe(
+                    Integer.parseInt(idField.getText()),
+                    nomField.getText(),
+                    prenomField.getText(),
+                    adresseField.getText(),
+                    numTelField.getText()
+            );
+            gestion.modifierEmployee(e);
+            JOptionPane.showMessageDialog(null, "Employee details updated successfully!");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Invalid input! Please enter valid numbers.");
+        }
+    }
+
+    @Override
+    public void addFicheSalaire() {
+        Employe employe = gestion.chercherEmployee(Integer.parseInt(idEmploye.getText()));
+        if (employe != null) {
+            FicheSalaire ficheSalaire = new FicheSalaire(
+                    0,
+                    employe,
+                    Integer.parseInt(nbhHeure.getText()),
+                    Double.parseDouble(tauxHeure.getText()),
+                    0.0,
+                    0.0
+            );
+            gestionSalaire.ajouterFicheSalaire(ficheSalaire);
+            JOptionPane.showMessageDialog(null, "FicheSalaire added successfully!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Employee not found!");
+        }
+    }
+
+    @Override
+    public void deleteFicheSalaire() {
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Enter the salary record ID:"));
+        FicheSalaire f = gestionSalaire.chercherFicheSalaire(id);
+        if (f != null) {
+            gestionSalaire.supprimerFicheSalaire(f);
+            JOptionPane.showMessageDialog(null, "Salary record deleted successfully.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Salary record not found.");
+        }
+    }
+
+    @Override
+    public void findFicheSalaire() {
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Enter the salary record ID:"));
+        FicheSalaire f = gestionSalaire.chercherFicheSalaire(id);
+        if (f != null) {
+            displayArea.setText("Le nombre d'heures est :" + f.getNbHeure() + "\n" +
+                    "Le taux d'heures est :" + f.getTauxHeure() + "\n" +
+                    "Le salaire brute est :" + f.getSalaireBrut() + "\n" +
+                    "Le salaire net est :" + f.getSalireNet());
+        } else {
+            displayArea.setText("Salary record not found.");
+        }
+    }
+
+    @Override
+    public void findAllFicheSalaires() {
+        StringBuilder sb = new StringBuilder();
+        for (FicheSalaire f : gestionSalaire.findAllFicheSalaires()) {
+            sb.append("ID: ").append(f.getFId()).append("\n")
+                    .append("Nombre d'heures: ").append(f.getNbHeure()).append("\n")
+                    .append("Taux d'heures: ").append(f.getTauxHeure()).append("\n")
+                    .append("Salaire brut: ").append(f.getSalaireBrut()).append("\n")
+                    .append("Salaire net: ").append(f.getSalireNet()).append("\n")
+                    .append("-------------------------\n");
+        }
+        displayArea.setText(sb.toString());
+    }
+
+    @Override
+    public void updateFicheSalaire() {
+        try {
+            if (idField.getText().isEmpty() || nbhHeure.getText().isEmpty() || tauxHeure.getText().isEmpty() || idEmploye.getText().isEmpty() || salaireBrutField.getText().isEmpty() || salaireNetField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields must be filled out!");
+                return;
+            }
+            FicheSalaire f = new FicheSalaire(
+                    Integer.parseInt(idField.getText()),
+                    gestion.chercherEmployee(Integer.parseInt(idEmploye.getText())),
+                    Integer.parseInt(nbhHeure.getText()),
+                    Double.parseDouble(tauxHeure.getText()),
+                    Double.parseDouble(salaireBrutField.getText()),
+                    Double.parseDouble(salaireNetField.getText())
+            );
+            gestionSalaire.modifierFicheSalaire(f);
+            JOptionPane.showMessageDialog(null, "FicheSalaire details updated successfully!");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Invalid input! Please enter valid numbers.");
+        }
+    }
 }
+

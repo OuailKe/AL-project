@@ -1,14 +1,8 @@
 package net.javaguides;
 
-import EmployeIHM.IHMEmploye;
-import EmployeIHM.IHMEmployeV2;
-import Enteties.Employe;
-import Databiz.EmployeData;
-import Services.*;
+import EmployeIHM.ManagementIHMV2;
 
 import java.lang.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -60,7 +54,7 @@ public class Main {
 
 //////////////////////////////////////////////////////////////////
 
-        new IHMEmployeV2().setVisible(true);
+        new ManagementIHMV2().setVisible(true);
 
 
 

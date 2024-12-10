@@ -3,6 +3,8 @@ package Services;
 import Enteties.FicheSalaire;
 import Databiz.*;
 
+import java.util.List;
+
 public class GestionSalaire implements InterfaceSalaire{
     @Override
     public boolean calculerSalair(FicheSalaire ficheS) {
@@ -74,5 +76,10 @@ public class GestionSalaire implements InterfaceSalaire{
             }
         }
         return result;
+    }
+
+    @Override
+    public List<FicheSalaire> findAllFicheSalaires() {
+        return List.of();
     }
 }
