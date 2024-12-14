@@ -29,7 +29,11 @@ public class FicheSalaire {
         this.nbHeure = nbHeure;
         this.tauxHeure = tauxHeure;
     }
-
+    public FicheSalaire(Employe e, int nbHeure, double tauxHeure) {
+        this.e = e;
+        this.nbHeure = nbHeure;
+        this.tauxHeure = tauxHeure;
+    }
     public FicheSalaire(int fId, Employe e, int nbHeure, double tauxHeure) {
         this.fId = fId;
         this.e = e;

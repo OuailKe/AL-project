@@ -14,5 +14,12 @@ public class Employe {
     public String adresse ;
     public String numTel;
 
+    public Employe(String nom, String prenom, String adresse, String numTel) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.numTel = numTel;
+    }
 
 }
